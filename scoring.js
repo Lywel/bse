@@ -18,44 +18,50 @@ firestore.settings(settings)
 function writeScore(login, score) {
   if (!login)
     return
-  firestore.collection('scores').add({
+  const doc = {
     login: login,
     score: score,
-  })
+    date: firebase.firestore.FieldValue.serverTimestamp(),
+  }
+  console.log(doc)
+  firestore.collection('scores').add(doc)
 }
 
 const scoreboard = document.querySelector('#scoreboard')
 
-firestore.collection('scores')
-  .orderBy("score", "desc")
-  .limit(10)
-  .get()
-  .then(snap => {
-    snap.forEach(doc => {
-      const data = doc.data()
-      const li = document.createElement("li")
-      const strong = document.createElement("strong")
-      strong.appendChild(document.createTextNode( data.login ))
-      li.appendChild(strong)
-      li.appendChild(document.createTextNode( data.score ))
-      scoreboard.appendChild(li)
-    })
+function showScoreboard(snap) {
+  // Clear
+  while (scoreboard.firstChild)
+    scoreboard.removeChild(scoreboard.firstChild)
+
+  // Add
+  snap.forEach(doc => {
+    const data = doc.data()
+    console.log(data)
+    if (data.score > 30)
+      return
+    const li = document.createElement("li")
+
+    const strong = document.createElement("strong")
+    strong.appendChild(document.createTextNode( data.login ))
+    const score = document.createElement("span")
+    score.appendChild(document.createTextNode( data.score ))
+
+    li.appendChild(strong)
+    li.appendChild(score)
+
+    if (data.date) {
+      const date = document.createElement("span")
+      date.appendChild(document.createTextNode( (new Date(data.date.seconds)).toLocaleString() ))
+
+      li.appendChild(date)
+    }
+
+    scoreboard.appendChild(li)
   })
+}
 
 firestore.collection("scores")
   .orderBy("score", "desc")
-  .limit(10)
-  .onSnapshot(snap =>{
-    while (scoreboard.firstChild)
-      scoreboard.removeChild(scoreboard.firstChild)
-
-    snap.forEach(doc => {
-      const data = doc.data()
-      const li = document.createElement("li")
-      const strong = document.createElement("strong")
-      strong.appendChild(document.createTextNode( data.login ))
-      li.appendChild(strong)
-      li.appendChild(document.createTextNode( data.score ))
-      scoreboard.appendChild(li)
-    })
-  }, function(error) {})
+  .limit(60)
+  .onSnapshot(showScoreboard)

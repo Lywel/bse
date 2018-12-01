@@ -4,23 +4,28 @@
     <meta charset="utf-8" />
     <title>Canvas Game :)</title>
     <style>
-    	* { padding: 0; margin: 0; }
-    	#game_canvas { background: #000; display: block; margin-left: 20px; float: left;}
-    	#ex { float: left; width: 40%; font-family: sans-serif; margin-left: 20px;}
-      #scoreboard li strong { display: inline-block; width: 150px; height: 25px; text-align: center; overflow: hidden;}
+      * { padding: 0; margin: 0; }
+      body > * {
+        margin: 0 15px;
+      }
+      #game_canvas { background: #000; display: block; float: left;}
+      #ex { float: left; width: 40%; font-family: sans-serif; }
+      #scoreboard li * {height: 25px; overflow: hidden; display: inline-block; }
+      #scoreboard li strong {width: 150px; text-align: center;}
+      #scoreboard li span:nth-of-type(1) {width: 50px;}
     </style>
 </head>
 <body>
 
 <canvas id="game_canvas" width="390" height="640"></canvas>
 <div id="ex">
-	<h1>Aim</h1>
-	<p>Move your shape to the right place to brake the lines. In order to break the line, you must be in the right shape!</p>
-	<h1>How to ?</h1>
-	<ul>
-		<li>Use <STRONG>←</STRONG> & <STRONG>→</STRONG> to move horizontaly.</li>
-		<li>Use <STRONG>↑</STRONG> & <STRONG>↓</STRONG> to change the shape.</li>
-	</ul>
+  <h1>Aim</h1>
+  <p>Move your shape to the right place to brake the lines. In order to break the line, you must be in the right shape!</p>
+  <h1>How to ?</h1>
+  <ul>
+    <li>Use <STRONG>←</STRONG> & <STRONG>→</STRONG> to move horizontaly.</li>
+    <li>Use <STRONG>↑</STRONG> & <STRONG>↓</STRONG> to change the shape.</li>
+  </ul>
   <h1>Top scores</h1>
   <ol id="scoreboard">
   </ol>
@@ -32,6 +37,7 @@
 <script src="game.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-admin.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
 
 <script src="scoring.js"></script>
