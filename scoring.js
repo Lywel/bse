@@ -43,6 +43,8 @@ firestore.collection('scores')
   })
 
 firestore.collection("scores")
+  .orderBy("score", "desc")
+  .limit(10)
   .onSnapshot(snap =>{
     while (scoreboard.firstChild)
       scoreboard.removeChild(scoreboard.firstChild)
