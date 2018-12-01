@@ -41,3 +41,19 @@ firestore.collection('scores')
       scoreboard.appendChild(li)
     })
   })
+
+firestore.collection("scores")
+  .onSnapshot(snap =>{
+    while (scoreboard.firstChild)
+      scoreboard.removeChild(scoreboard.firstChild)
+
+    snap.forEach(doc => {
+      const data = doc.data()
+      const li = document.createElement("li")
+      const strong = document.createElement("strong")
+      strong.appendChild(document.createTextNode( data.login ))
+      li.appendChild(strong)
+      li.appendChild(document.createTextNode( data.score ))
+      scoreboard.appendChild(li)
+    })
+  }, function(error) {})
