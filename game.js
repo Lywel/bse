@@ -168,6 +168,7 @@ function lose() {
 	Game.ctx.textAlign = "center";
 	Game.ctx.strokeText(("000" + Game.lvl).substr(-3,3),canvas.width/2,canvas.height/2);
 	Game.audio.pause();
+  saveScore(Game.lvl)
 }
 
 function showScore() {
@@ -175,4 +176,8 @@ function showScore() {
 	Game.ctx.textAlign = "center";
 	Game.ctx.fillStyle = "rgba(255,255,255,.1)";
 	Game.ctx.fillText(("000" + Game.lvl).substr(-3,3),canvas.width/2,canvas.height/2);
+}
+
+function saveScore(score) {
+  writeScore(prompt("Save score as:"), score)
 }
