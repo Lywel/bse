@@ -28,7 +28,6 @@ const scoreboard = document.querySelector('#scoreboard')
 
 firestore.collection('scores')
   .orderBy("score", "desc")
-  .orderBy("", "desc")
   .limit(10)
   .get()
   .then(snap => {
