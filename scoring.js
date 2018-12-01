@@ -37,9 +37,6 @@ function showScoreboard(snap) {
   // Add
   snap.forEach(doc => {
     const data = doc.data()
-    console.log(data)
-    if (data.score > 30)
-      return
     const li = document.createElement("li")
 
     const strong = document.createElement("strong")
