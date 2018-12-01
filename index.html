@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Canvas Game :)</title>
+    <style>
+    	* { padding: 0; margin: 0; }
+    	#game_canvas { background: #000; display: block; margin-left: 20px; float: left;}
+    	#ex { float: left; width: 40%; font-family: sans-serif; margin-left: 20px;}
+    </style>
+</head>
+<body>
+
+<canvas id="game_canvas" width="390" height="640"></canvas>
+<div id="ex">
+	<h1>Aim</h1>
+	<p>Move your shape to the right place to brake the lines. In order to break the line, you must be in the right shape!</p>
+	<h1>How to ?</h1>
+	<ul>
+		<li>Use <STRONG>←</STRONG> & <STRONG>→</STRONG> to move horizontaly.</li>
+		<li>Use <STRONG>↑</STRONG> & <STRONG>↓</STRONG> to change the shape.</li>
+	</ul>
+</div>
+<script src="class/Player.js"></script>
+<script src="class/Bar.js"></script>
+<script src="class/Collisions.js"></script>
+<script src="class/Particle.js"></script>
+<script src="game.js"></script>
+
+</body>
+</html>
