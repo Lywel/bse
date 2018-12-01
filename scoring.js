@@ -60,5 +60,5 @@ function showScoreboard(snap) {
 
 firestore.collection("scores")
   .orderBy("score", "desc")
-  .limit(60)
+  .limit(15)
   .onSnapshot(showScoreboard)
